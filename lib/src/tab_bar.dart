@@ -15,6 +15,7 @@ class SegmentedTabControl extends StatefulWidget implements PreferredSizeWidget 
     this.controller,
     required this.textStyle,
     required this.selectedTextStyle,
+    this.padding,
   }) : super(key: key);
 
   /// Height of the widget.
@@ -31,6 +32,10 @@ class SegmentedTabControl extends StatefulWidget implements PreferredSizeWidget 
   /// Style of all labels. Color will not applied.
   final TextStyle textStyle;
   final TextStyle selectedTextStyle;
+  /// The amount of space to surround the child inside the bounds of the button.
+  ///
+  /// Defaults to 16.0 pixels.
+  final EdgeInsetsGeometry? padding;
 
   @override
   _SegmentedTabControlState createState() => _SegmentedTabControlState();
@@ -155,6 +160,7 @@ class _SegmentedTabControlState extends State<SegmentedTabControl> with SingleTi
           currentIndex: _internalIndex,
           textStyle: widget.textStyle,
           selectedTextStyle: widget.selectedTextStyle,
+          padding: widget.padding,
         ),
       );
     });
@@ -179,6 +185,7 @@ class _Labels extends StatelessWidget {
     required this.currentIndex,
     required this.textStyle,
     required this.selectedTextStyle,
+    this.padding,
   }) : super(key: key);
 
   final VoidCallback Function(int index)? callbackBuilder;
@@ -188,6 +195,10 @@ class _Labels extends StatelessWidget {
   /// Style of all labels. Color will not applied.
   final TextStyle textStyle;
   final TextStyle selectedTextStyle;
+  /// The amount of space to surround the child inside the bounds of the button.
+  ///
+  /// Defaults to 16.0 pixels.
+  final EdgeInsetsGeometry? padding;
 
   @override
   Widget build(BuildContext context) {
@@ -199,7 +210,7 @@ class _Labels extends StatelessWidget {
           final tab = tabs[index];
           final isSelected = index == currentIndex;
           return CupertinoButton(
-            padding: tab.padding,
+            padding: padding,
             onPressed: callbackBuilder?.call(index),
             child: AnimatedDefaultTextStyle(
               duration: kTabScrollDuration,
