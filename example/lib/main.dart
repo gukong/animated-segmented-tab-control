@@ -1,5 +1,4 @@
 import 'package:animated_segmented_tab_control/animated_segmented_tab_control.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 void main() {
@@ -19,34 +18,23 @@ class MyApp extends StatelessWidget {
           body: SafeArea(
             child: Stack(
               children: [
-                Padding(
-                  padding: const EdgeInsets.all(16.0),
+                const Padding(
+                  padding: EdgeInsets.all(16.0),
                   child: SegmentedTabControl(
                     // Customization of widget
-                    radius: const Radius.circular(3),
-                    backgroundColor: Colors.grey.shade300,
-                    indicatorColor: Colors.orange.shade200,
-                    tabTextColor: Colors.black45,
-                    selectedTabTextColor: Colors.white,
-                    squeezeIntensity: 2,
-                    height: 45,
-                    tabPadding: const EdgeInsets.symmetric(horizontal: 8),
-                    textStyle: Theme.of(context).textTheme.bodyText1,
+                    height: 60,
                     // Options for selection
                     // All specified values will override the [SegmentedTabControl] setting
+                    textStyle: TextStyle(fontSize: 16, color: Colors.black87),
+                    selectedTextStyle: TextStyle(fontSize: 20, color: Colors.deepOrange),
                     tabs: [
                       SegmentTab(
                         label: 'ACCOUNT',
-                        // For example, this overrides [indicatorColor] from [SegmentedTabControl]
-                        color: Colors.red.shade200,
                       ),
                       SegmentTab(
                         label: 'HOME',
-                        backgroundColor: Colors.blue.shade100,
-                        selectedTextColor: Colors.black45,
-                        textColor: Colors.black26,
                       ),
-                      const SegmentTab(label: 'NEW'),
+                      SegmentTab(label: 'NEW'),
                     ],
                   ),
                 ),
@@ -94,10 +82,14 @@ class SampleWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       alignment: Alignment.center,
-      decoration: BoxDecoration(
-          color: color,
-          borderRadius: const BorderRadius.vertical(top: Radius.circular(10))),
-      child: Text(label),
+      decoration: BoxDecoration(color: color, borderRadius: const BorderRadius.vertical(top: Radius.circular(10))),
+      child: ListView.builder(
+        itemCount: 100,
+        itemExtent: 30,
+        itemBuilder: (BuildContext context, int index) {
+          return Text(index.toString());
+        },
+      ),
     );
   }
 }
